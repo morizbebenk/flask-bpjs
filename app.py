@@ -1,4 +1,3 @@
-from Crypto.Util.Padding import pad, unpad
 from flask import Flask, request, jsonify
 from dotenv import dotenv_values
 from Crypto.Cipher import AES
