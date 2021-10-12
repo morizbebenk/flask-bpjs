@@ -13,11 +13,12 @@ import json
 app = Flask(__name__)
 cors = CORS(app)
 
-def setNoneIfEmpty(data):
-    if data == '':
-        return None
+def checkDataExist(array):
+    for data in array:
+        if data == '' or data == None:
+            return False
 
-    return data
+    return True
 
 def decrypt(keys, encrypts):
     decompress = None
@@ -73,17 +74,24 @@ def bridging():
         header_host = request.headers.get('x-host')
         header_consid = request.headers.get('x-consid')
         header_secret = request.headers.get('x-secret')
+        header_is_encrypt = request.headers.get('x-is_encrypt')
 
-        if setNoneIfEmpty(header_host) == None or setNoneIfEmpty(header_consid) == None or setNoneIfEmpty(header_secret) == None:
+        if checkDataExist([header_host, header_consid, header_secret, header_is_encrypt]):
+            host = header_host
+            consid = header_consid
+            secret = header_secret
+            is_encrypt = header_is_encrypt            
+
+        else:
             config = dotenv_values(".env")
             host = config['HOST_BPJS']
             consid = config['CONSID']
             secret = config['SECRET']
 
-        else:
-            host = header_host
-            consid = header_consid
-            secret = header_secret
+            if 'IS_ENCRYPT' in config:
+                is_encrypt = config['IS_ENCRYPT']
+            else:
+                is_encrypt = 1
 
         is_json = False
 
@@ -120,12 +128,18 @@ def bridging():
             keys = consid + secret + timestamp
             res = res.json()
 
+            if int(is_encrypt) == 1:
+                response = decrypt(keys, res['response'])
+
+            else:
+                response = res['response']
+
             data = {
                 'metaData': {
                     'code': res['metaData']['code'],
                     'message': res['metaData']['message'],
                 },
-                'response': decrypt(keys, res['response'])
+                'response': response
             }
 
             return jsonify(data), res['metaData']['code']
