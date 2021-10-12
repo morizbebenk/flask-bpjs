@@ -56,7 +56,7 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 ## File .env
 - Salin file `.env.example`
 - Ubah nama file menjadi `.env`
-- Lengkapi data `HOST`, `CONSID` & `SECRET`
+- Lengkapi data `HOST`, `CONSID`, `SECRET` & `IS_ENCRYPT`
 - `Host Development` : `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/`
 - `Host Production` : `-`
 
@@ -157,7 +157,7 @@ Berjalan di port 8080.
 
 #### Menggunakan environment credential
 
-`host`, `consid` dan `secret` mengambil data dari file `.env`.
+`host`, `consid`, `secret` dan `is_encrypt` mengambil data dari file `.env`.
 
 | Request | Konten | Nilai | Keterangan |
 | ------- | ------ | ----- | ---------- |
@@ -170,15 +170,16 @@ Berjalan di port 8080.
 
 #### Menggunakan header credential
 
-`host`, `consid` dan `secret` mengambil data dari header yang dikirimkan, jika menggunakan metode ini diwajibkan mengirim data header `x-host`, `x-consid` dan `x-secret` dengan lengkap, jika salah satu kosong atau tidak dikirim maka secara default akan menggunakan metode `environment credential` diatas.
+`host`, `consid`, `secret` dan `is_encrypt` mengambil data dari header yang dikirimkan, jika menggunakan metode ini diwajibkan mengirim data header `x-host`, `x-consid`, `x-secret` dan `x-is_encrypt` dengan lengkap, jika salah satu kosong atau tidak dikirim maka secara default akan menggunakan metode `environment credential` diatas.
 
 | Request | Konten | Nilai | Keterangan |
 | ------- | ------ | ----- | ---------- |
 | Host | `http://127.0.0.1:5000` | - | Menyesuaikan host dan port yang di jalankan |
 | Header | `Content-Type` | `application/json` | Opsional, jika body format json maka ini wajib |
-| Header | `x-host` | `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/` (host development) | Custom host |
-| Header | `x-consid` | `1234` | Custom consid |
-| Header | `x-secret` | `12345abcde` | Custom secret |
+| Header | `x-host` | `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/` (host development) | Custom `host` |
+| Header | `x-consid` | `1234` | Custom `consid` |
+| Header | `x-secret` | `12345abcde` | Custom `secret` |
+| Header | `x-is_encrypt` | `0` / `1` | Custom `is_encrypt` |
 | Method | `POST` | - | Wajib POST |
 | Body | `url` | `referensi/poli/ana` (contoh) | Wajib, mengacu dokumentasi VClaim BPJS tanpa base url. Contoh : `referensi/poli/ana` |
 | Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS |
