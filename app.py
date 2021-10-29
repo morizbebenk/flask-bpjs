@@ -33,12 +33,12 @@ def decrypt(keys, encrypts):
         
     return decompress
 
-def rest_bpjs(consid, secret, url, method, payload, timestamp):
+def rest_bpjs(consid, secret, user_key, url, method, payload, timestamp):
     message = consid+"&"+timestamp
     signature = hmac.new(bytes(secret,'UTF-8'),bytes(message,'UTF-8'), hashlib.sha256).digest()
     encodeSignature = base64.b64encode(signature)
 
-    headers = {'X-cons-id': consid, 'X-timestamp': timestamp, 'X-signature': encodeSignature.decode('UTF-8'), 'Content-Type': 'Application/x-www-form-urlencoded','Accept': '*/*'}
+    headers = {'X-cons-id': consid, 'X-timestamp': timestamp, 'X-signature': encodeSignature.decode('UTF-8'), 'user_key': user_key, 'Content-Type': 'Application/x-www-form-urlencoded','Accept': '*/*'}
 
     if payload == '' and payload == None :
         payload = 0
@@ -74,12 +74,14 @@ def bridging():
         header_host = request.headers.get('x-host')
         header_consid = request.headers.get('x-consid')
         header_secret = request.headers.get('x-secret')
+        header_user_key = request.headers.get('x-user_key')
         header_is_encrypt = request.headers.get('x-is_encrypt')
 
-        if checkDataExist([header_host, header_consid, header_secret, header_is_encrypt]):
+        if checkDataExist([header_host, header_consid, header_secret, header_user_key, header_is_encrypt]):
             host = header_host
             consid = header_consid
             secret = header_secret
+            user_key = header_user_key
             is_encrypt = header_is_encrypt            
 
         else:
@@ -92,6 +94,11 @@ def bridging():
                 is_encrypt = config['IS_ENCRYPT']
             else:
                 is_encrypt = 1
+
+            if 'USER_KEY' in config:
+                user_key = config['USER_KEY']
+            else:
+                user_key = ''
 
         is_json = False
 
@@ -122,7 +129,7 @@ def bridging():
 
             return jsonify(data), 400
 
-        res = rest_bpjs(consid, secret, url, method, payload, timestamp)
+        res = rest_bpjs(consid, secret, user_key, url, method, payload, timestamp)
 
         if res.status_code != 404:
             keys = consid + secret + timestamp
@@ -134,15 +141,21 @@ def bridging():
             else:
                 response = res['response']
 
+            if 'metaData' in res:
+                metadata = 'metaData'
+
+            else:
+                metadata = 'metadata'
+
             data = {
                 'metaData': {
-                    'code': res['metaData']['code'],
-                    'message': res['metaData']['message'],
+                    'code': res[metadata]['code'],
+                    'message': res[metadata]['message'],
                 },
                 'response': response
             }
 
-            return jsonify(data), res['metaData']['code']
+            return jsonify(data), res[metadata]['code']
 
         else:
             data = {

@@ -1,6 +1,6 @@
 ## Flask BPJS
 
-Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS Vclaim-Rest 1.1 (Encrypted Version).
+Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS Vclaim-Rest 1.1 (Encrypted Version). Support v1 dan apijkn.
 
 ## Kebutuhan
 
@@ -56,9 +56,11 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 ## File .env
 - Salin file `.env.example`
 - Ubah nama file menjadi `.env`
-- Lengkapi data `HOST`, `CONSID`, `SECRET` & `IS_ENCRYPT`
-- `Host Development` : `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/`
-- `Host Production` : `-`
+- Lengkapi data `HOST`, `CONSID`, `SECRET`, `USER_KEY` & `IS_ENCRYPT`
+- `Host Development VClaim` : `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/`
+- `Host Production VClaim` : `-`
+- `Host Development API JKN` : `https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/`
+- `Host Production API JKN` : `-`
 
 ## Pengaturan
 
@@ -179,6 +181,7 @@ Berjalan di port 8080.
 | Header | `x-host` | `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/` (host development) | Custom `host` |
 | Header | `x-consid` | `1234` | Custom `consid` |
 | Header | `x-secret` | `12345abcde` | Custom `secret` |
+| Header | `x-user_key` | `1a2b3c4d5e6f7g8h9i10j` | Custom `user_key` untuk API JKN |
 | Header | `x-is_encrypt` | `0` / `1` | Custom `is_encrypt` |
 | Method | `POST` | - | Wajib POST |
 | Body | `url` | `referensi/poli/ana` (contoh) | Wajib, mengacu dokumentasi VClaim BPJS tanpa base url. Contoh : `referensi/poli/ana` |
