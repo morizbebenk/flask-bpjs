@@ -1,6 +1,6 @@
 ## Flask BPJS
 
-Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS Vclaim-Rest 1.1 (Encrypted Version). Support v1 dan apijkn.
+Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS Vclaim-Rest 1.1 (Encrypted Version). Support VClaim v1 dan API JKN.
 
 ## Kebutuhan
 
