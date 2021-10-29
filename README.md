@@ -159,7 +159,7 @@ Berjalan di port 8080.
 
 #### Menggunakan environment credential
 
-`host`, `consid`, `secret` dan `is_encrypt` mengambil data dari file `.env`.
+`host`, `consid`, `secret`, `user_key` dan `is_encrypt` mengambil data dari file `.env`.
 
 | Request | Konten | Nilai | Keterangan |
 | ------- | ------ | ----- | ---------- |
@@ -172,7 +172,7 @@ Berjalan di port 8080.
 
 #### Menggunakan header credential
 
-`host`, `consid`, `secret` dan `is_encrypt` mengambil data dari header yang dikirimkan, jika menggunakan metode ini diwajibkan mengirim data header `x-host`, `x-consid`, `x-secret` dan `x-is_encrypt` dengan lengkap, jika salah satu kosong atau tidak dikirim maka secara default akan menggunakan metode `environment credential` diatas.
+`host`, `consid`, `secret`, `user_key` dan `is_encrypt` mengambil data dari header yang dikirimkan, jika menggunakan metode ini diwajibkan mengirim data header `x-host`, `x-consid`, `x-secret`, `x-user_key` dan `x-is_encrypt` dengan lengkap, jika salah satu kosong atau tidak dikirim maka secara default akan menggunakan metode `environment credential` diatas.
 
 | Request | Konten | Nilai | Keterangan |
 | ------- | ------ | ----- | ---------- |
