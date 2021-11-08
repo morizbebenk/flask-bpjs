@@ -45,17 +45,18 @@ def rest_bpjs(consid, secret, user_key, url, method, payload, timestamp):
     else:
         payload = json.dumps(payload)
     
-    if method == 'post':
+    if method.lower() == 'post':
         if payload == 0:
             res = requests.post(url, headers=headers)
         else:
             res = requests.post(url, data=payload, headers=headers)
-    elif method == 'put':
+
+    elif method.lower() == 'put':
         if payload == 0:
             res = requests.put(url, headers=headers)
         else:
             res = requests.put(url, data=payload, headers=headers)
-    elif method == 'delete':
+    elif method.lower() == 'delete':
         if payload == 0:
             res = requests.delete(url, headers=headers)
         else:
@@ -106,28 +107,35 @@ def bridging():
             is_json = True
 
         if is_json == False:
-            url = host + request.form.get('url')
-            method = request.form.get('method')
-            payload = request.form.get('payload')
-
-        else:
-            data_json = request.json
-            url = host + data_json['url']
-            method = data_json['method']
-            payload = data_json['payload']
-
-        timestamp = str(int(datetime.today().timestamp()))
-
-        if(not url or not method):
             data = {
                 'metaData': {
                     'code': 400,
-                    'message': "Pastikan untuk mengirim url, method dan/atau payload",
+                    'message': "Pastikan format body json dan menggunakan header Content-Type: application/json",
                 },
                 'response': None
             }
 
             return jsonify(data), 400
+
+        else:
+            data_json = request.json
+
+            if('url' not in data_json or 'method' not in data_json or 'payload' not in data_json):
+                data = {
+                    'metaData': {
+                        'code': 400,
+                        'message': "Pastikan untuk mengirim url, method dan payload. Jika tidak ada data yang dikirim, payload : '' (string kosong)",
+                    },
+                    'response': None
+                }
+
+                return jsonify(data), 400
+
+            url = host + data_json['url']
+            method = data_json['method']
+            payload = data_json['payload']
+
+        timestamp = str(int(datetime.today().timestamp()))
 
         res = rest_bpjs(consid, secret, user_key, url, method, payload, timestamp)
 
@@ -135,17 +143,28 @@ def bridging():
             keys = consid + secret + timestamp
             res = res.json()
 
-            if int(is_encrypt) == 1:
-                response = decrypt(keys, res['response'])
-
-            else:
-                response = res['response']
-
             if 'metaData' in res:
                 metadata = 'metaData'
 
             else:
                 metadata = 'metadata'
+
+            if res[metadata]['code'] == 0:
+                data = {
+                    'metaData': {
+                        'code': 400,
+                        'message': res[metadata]['message'],
+                    },
+                    'response': None
+                }
+
+                return jsonify(data), 400
+
+            if int(is_encrypt) == 1:
+                response = decrypt(keys, res['response'])
+
+            else:
+                response = res['response']
 
             data = {
                 'metaData': {
