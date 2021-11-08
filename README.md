@@ -164,11 +164,11 @@ Berjalan di port 8080.
 | Request | Konten | Nilai | Keterangan |
 | ------- | ------ | ----- | ---------- |
 | Host | `http://127.0.0.1:5000` | - | Menyesuaikan host dan port yang di jalankan |
-| Header | `Content-Type` | `application/json` | Opsional, jika body format json maka ini wajib |
+| Header | `Content-Type` | `application/json` | Wajib |
 | Method | `POST` | - | Wajib POST |
 | Body | `url` | `referensi/poli/ana` (contoh) | Wajib, mengacu dokumentasi VClaim BPJS tanpa base url. Contoh : `referensi/poli/ana` |
-| Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS |
-| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest api VClaim BPJS |
+| Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS / API JKN |
+| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN |
 
 #### Menggunakan header credential
 
@@ -177,7 +177,7 @@ Berjalan di port 8080.
 | Request | Konten | Nilai | Keterangan |
 | ------- | ------ | ----- | ---------- |
 | Host | `http://127.0.0.1:5000` | - | Menyesuaikan host dan port yang di jalankan |
-| Header | `Content-Type` | `application/json` | Opsional, jika body format json maka ini wajib |
+| Header | `Content-Type` | `application/json` | Wajib |
 | Header | `x-host` | `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/` (host development) | Custom `host` |
 | Header | `x-consid` | `1234` | Custom `consid` |
 | Header | `x-secret` | `12345abcde` | Custom `secret` |
@@ -185,8 +185,8 @@ Berjalan di port 8080.
 | Header | `x-is_encrypt` | `0` / `1` | Custom `is_encrypt` |
 | Method | `POST` | - | Wajib POST |
 | Body | `url` | `referensi/poli/ana` (contoh) | Wajib, mengacu dokumentasi VClaim BPJS tanpa base url. Contoh : `referensi/poli/ana` |
-| Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS |
-| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest api VClaim BPJS |
+| Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS / API JKN |
+| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN | 
 
 ## Sumber Daya
 - https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark
