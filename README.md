@@ -168,7 +168,7 @@ Berjalan di port 8080.
 | Method | `POST` | - | Wajib POST |
 | Body | `url` | `referensi/poli/ana` (contoh) | Wajib, mengacu dokumentasi VClaim BPJS tanpa base url. Contoh : `referensi/poli/ana` |
 | Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS / API JKN |
-| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN |
+| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN. Jika tidak ada data, payload diisi string kosong |
 
 #### Menggunakan header credential
 
@@ -186,7 +186,7 @@ Berjalan di port 8080.
 | Method | `POST` | - | Wajib POST |
 | Body | `url` | `referensi/poli/ana` (contoh) | Wajib, mengacu dokumentasi VClaim BPJS tanpa base url. Contoh : `referensi/poli/ana` |
 | Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS / API JKN |
-| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN | 
+| Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN. Jika tidak ada data, payload diisi string kosong | 
 
 ## Sumber Daya
 - https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark
