@@ -57,10 +57,11 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 - Salin file `.env.example`
 - Ubah nama file menjadi `.env`
 - Lengkapi data `HOST`, `CONSID`, `SECRET`, `USER_KEY` & `IS_ENCRYPT`
-- `Host Development VClaim` : `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/`
-- `Host Production VClaim` : `-`
-- `Host Development API JKN` : `https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/`
-- `Host Production API JKN` : `-`
+- Host Development VClaim : https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/
+- Host Development VClaim : https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev/
+- Host Production VClaim : -
+- Host Development API JKN : https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/
+- Host Production API JKN : -
 
 ## Pengaturan
 
@@ -82,26 +83,46 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 
 - **Windows**
 
+    </> **Debug ON :**
+
+    ```bash
+    set FLASK_DEBUG=1
+    ```
+
+    </> **Debug OFF :**
+
+    ```bash
+    set FLASK_DEBUG=0
+    ```
+
+- **Bash**
+
+    </> **Debug ON :**
+
+    ```bash
+    export FLASK_DEBUG=1
+    ```
+
+    </> **Debug OFF :**
+
+    ```bash
+    export FLASK_DEBUG=0
+    ```
+
+### Mode Environment
+
+- **Windows**
+
     </> **Development :**
 
     ```bash
     set FLASK_ENV=development
     ```
 
-    atau
-    ```bash
-    set FLASK_DEBUG=1
-    ```
-
     </> **Production :**
 
     ```bash
     set FLASK_ENV=production
-    ```
-
-    atau
-    ```bash
-    set FLASK_DEBUG=0
     ```
 
 - **Bash**
@@ -112,22 +133,10 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
     export FLASK_ENV=development
     ```
 
-    atau
-
-    ```bash
-    export FLASK_DEBUG=1
-    ```
-
     </> **Production :**
 
     ```bash
     export FLASK_ENV=production
-    ```
-
-    atau
-
-    ```bash
-    export FLASK_DEBUG=0
     ```
 
 ## Menjalankan Aplikasi
@@ -178,7 +187,7 @@ Berjalan di port 8080.
 | ------- | ------ | ----- | ---------- |
 | Host | `http://127.0.0.1:5000` | - | Menyesuaikan host dan port yang di jalankan |
 | Header | `Content-Type` | `application/json` | Wajib |
-| Header | `x-host` | `https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/` (host development) | Custom `host` |
+| Header | `x-host` | `https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev/` (host development) | Custom `host` |
 | Header | `x-consid` | `1234` | Custom `consid` |
 | Header | `x-secret` | `12345abcde` | Custom `secret` |
 | Header | `x-user_key` | `1a2b3c4d5e6f7g8h9i10j` | Custom `user_key` untuk API JKN |
@@ -189,7 +198,7 @@ Berjalan di port 8080.
 | Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN. Jika tidak ada data, payload diisi string kosong | 
 
 ## Sumber Daya
-- https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark
+- https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark/portal.html
 
 ## Lisensi
 - Aplikasi ini open source dengan lisensi [MIT](LICENSE).
