@@ -161,7 +161,18 @@ def bridging():
                 return jsonify(data), 400
 
             if int(is_encrypt) == 1:
-                response = decrypt(keys, res['response'])
+                url_not_encrypt = ["SEP/2.0/delete"]
+                status_encrypt = True
+
+                for unc in url_not_encrypt:
+                    if unc in url:
+                        status_encrypt = False
+
+                if status_encrypt == True:
+                    response = decrypt(keys, res['response'])
+
+                else:
+                    response = res['response']
 
             else:
                 response = res['response']
