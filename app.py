@@ -13,14 +13,14 @@ import json
 app = Flask(__name__)
 cors = CORS(app)
 
-def checkDataExist(array):
+def check_data_exist(array):
     for data in array:
         if data == '' or data == None:
             return False
 
     return True
 
-def decrypt(keys, encrypts):
+def decrypt_data(keys, encrypts):
     decompress = None
 
     if encrypts != None:
@@ -33,6 +33,26 @@ def decrypt(keys, encrypts):
         
     return decompress
 
+def check_json(str_json):
+    try:
+        json_object = json.loads(str_json)
+
+    except ValueError as e:
+        return False
+        
+    return True
+
+def fixed_url(url):
+    if url.startswith('/') == True:
+        return url[1:]
+
+    if url.endswith('/') == True:
+        return url[:-1]
+
+    else:
+        return url
+
+
 def rest_bpjs(consid, secret, user_key, url, method, payload, timestamp):
     message = consid+"&"+timestamp
     signature = hmac.new(bytes(secret,'UTF-8'),bytes(message,'UTF-8'), hashlib.sha256).digest()
@@ -40,7 +60,7 @@ def rest_bpjs(consid, secret, user_key, url, method, payload, timestamp):
 
     headers = {'X-cons-id': consid, 'X-timestamp': timestamp, 'X-signature': encodeSignature.decode('UTF-8'), 'user_key': user_key, 'Content-Type': 'Application/x-www-form-urlencoded','Accept': '*/*'}
 
-    if payload == '' and payload == None :
+    if payload == '' or payload == None:
         payload = 0
     else:
         payload = json.dumps(payload)
@@ -78,7 +98,7 @@ def bridging():
         header_user_key = request.headers.get('x-user_key')
         header_is_encrypt = request.headers.get('x-is_encrypt')
 
-        if checkDataExist([header_host, header_consid, header_secret, header_user_key, header_is_encrypt]):
+        if check_data_exist([header_host, header_consid, header_secret, header_user_key, header_is_encrypt]):
             host = header_host
             consid = header_consid
             secret = header_secret
@@ -93,11 +113,13 @@ def bridging():
 
             if 'IS_ENCRYPT' in config:
                 is_encrypt = config['IS_ENCRYPT']
+
             else:
                 is_encrypt = 1
 
             if 'USER_KEY' in config:
                 user_key = config['USER_KEY']
+
             else:
                 user_key = ''
 
@@ -131,7 +153,7 @@ def bridging():
 
                 return jsonify(data), 400
 
-            url = host + data_json['url']
+            url = fixed_url(host) + "/" + fixed_url(data_json['url'])
             method = data_json['method']
             payload = data_json['payload']
 
@@ -140,52 +162,76 @@ def bridging():
         res = rest_bpjs(consid, secret, user_key, url, method, payload, timestamp)
 
         if res.status_code != 404:
-            keys = consid + secret + timestamp
-            res = res.json()
+            if check_json(res.text) == True:
 
-            if 'metaData' in res:
-                metadata = 'metaData'
+                keys = consid + secret + timestamp
+                res = res.json()
 
-            else:
-                metadata = 'metadata'
+                if 'metaData' in res:
+                    metadata = 'metaData'
 
-            if res[metadata]['code'] == 0:
-                data = {
-                    'metaData': {
-                        'code': 400,
-                        'message': res[metadata]['message'],
-                    },
-                    'response': None
-                }
+                else:
+                    metadata = 'metadata'
 
-                return jsonify(data), 400
+                if res[metadata]['code'] == 0:
+                    data = {
+                        'metaData': {
+                            'code': 400,
+                            'message': res[metadata]['message'],
+                        },
+                        'response': None
+                    }
 
-            if int(is_encrypt) == 1:
-                url_not_encrypt = ["SEP/2.0/delete"]
-                status_encrypt = True
+                    return jsonify(data), 400
 
-                for unc in url_not_encrypt:
-                    if unc in url:
-                        status_encrypt = False
+                if 'response' not in res:
+                    data = {
+                        'metaData': {
+                            'code': res[metadata]['code'],
+                            'message': res[metadata]['message'],
+                        },
+                        'response': None
+                    }
 
-                if status_encrypt == True:
-                    response = decrypt(keys, res['response'])
+                    return jsonify(data), res[metadata]['code']
+
+                if int(is_encrypt) == 1:
+                    url_not_encrypt = ["SEP/2.0/delete"]
+                    status_encrypt = True
+
+                    for unc in url_not_encrypt:
+                        if unc in url:
+                            status_encrypt = False
+
+                    if status_encrypt == True:
+                        response = decrypt_data(keys, res['response'])
+
+                    else:
+                        response = res['response']
 
                 else:
                     response = res['response']
 
+                data = {
+                    'metaData': {
+                        'code': res[metadata]['code'],
+                        'message': res[metadata]['message'],
+                    },
+                    'response': response
+                }
+
+                return jsonify(data), res[metadata]['code']
+
             else:
-                response = res['response']
+                data = {
+                    'metaData': {
+                        'code': res.status_code,
+                        'message': res.text,
+                    },
+                    'response': None
+                }
 
-            data = {
-                'metaData': {
-                    'code': res[metadata]['code'],
-                    'message': res[metadata]['message'],
-                },
-                'response': response
-            }
-
-            return jsonify(data), res[metadata]['code']
+                return jsonify(data), res.status_code
 
         else:
             data = {
@@ -208,4 +254,3 @@ def bridging():
         }
 
         return jsonify(data), 405
-    
