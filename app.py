@@ -220,7 +220,12 @@ def bridging():
                     'response': response
                 }
 
-                return jsonify(data), res[metadata]['code']
+                status_code = res[metadata]['code']
+
+                if res[metadata]['code'] == 1:
+                    status_code = 200
+                    
+                return jsonify(data), status_code
 
             else:
                 data = {
@@ -244,11 +249,42 @@ def bridging():
 
             return jsonify(data), 404
     
+    elif(request.method == 'GET'):
+        data = {
+            'metaData': {
+                'code': 200,
+                'message': "Selamat datang di " + request.host_url + " Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS VCLAIM-REST 2.0 (Encrypted Version). Support VCLAIM v1 dan API JKN (Antrean RS).",
+                'note': "Catatan perubahan tersedia di " + request.host_url + "history"
+            },
+            'response': None
+        }
+
+        return jsonify(data), 405
+    
     else:
         data = {
             'metaData': {
                 'code': 405,
                 'message': "Method dilarang, gunakan method POST",
+            },
+            'response': None
+        }
+
+        return jsonify(data), 405
+
+@app.route("/history", methods=['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH'])
+def history():
+    if(request.method == 'GET'):
+        files = open('history.json')
+        data = json.load(files)
+
+        return jsonify(data), 405
+        
+    else:
+        data = {
+            'metaData': {
+                'code': 405,
+                'message': "Method dilarang, gunakan method GET",
             },
             'response': None
         }
