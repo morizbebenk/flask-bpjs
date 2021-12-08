@@ -1,6 +1,6 @@
 ## Flask BPJS
 
-Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS Vclaim-Rest 2.0 (Encrypted Version). Support VClaim v1 dan API JKN (Antrean).
+Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS VCLAIM-REST 2.0 (Encrypted Version). Support VCLAIM v1 dan API JKN (Antrean RS).
 
 ## Kebutuhan
 
@@ -65,7 +65,7 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 
 ## Pengaturan
 
-### Setup aplikasi
+### Setup Aplikasi
 
 - **Windows**
 
@@ -149,14 +149,14 @@ flask run
 
 Secara default akan berjalan di `http://127.0.0.1:5000`.
 
-#### Custom host
+#### Custom Host
 ```bash
 flask run -h 0.0.0.0
 ```
 
 Dapat diakses semua klien di jaringan yang sama.
 
-#### Custom port
+#### Custom Port
 ```bash
 flask run -p 8080
 ```
@@ -166,7 +166,7 @@ Berjalan di port 8080.
 ## Cara Pakai
 
 
-#### Menggunakan environment credential
+#### Menggunakan Environment Credential
 
 `host`, `consid`, `secret`, `user_key` dan `is_encrypt` mengambil data dari file `.env`.
 
@@ -179,9 +179,9 @@ Berjalan di port 8080.
 | Body | `method` | `GET` / `POST` / `PUT` / `DELETE` | Wajib, mengacu dokumentasi VClaim BPJS / API JKN |
 | Body | `payload` | `{"request": {"t_sep": {"noSep": "0301R0011017V000007", "user": "Coba Ws"}}}` (contoh) | Opsional menyesuaikan rest VClaim BPJS / API JKN. Jika tidak ada data, payload diisi string kosong |
 
-#### Menggunakan header credential
+#### Menggunakan Header Credential
 
-`host`, `consid`, `secret`, `user_key` dan `is_encrypt` mengambil data dari header yang dikirimkan, jika menggunakan metode ini diwajibkan mengirim data header `x-host`, `x-consid`, `x-secret`, `x-user_key` dan `x-is_encrypt` dengan lengkap, jika salah satu kosong atau tidak dikirim maka secara default akan menggunakan metode `environment credential` diatas.
+`host`, `consid`, `secret`, `user_key` dan `is_encrypt` mengambil data dari header yang dikirimkan, jika menggunakan metode ini diwajibkan mengirim data header `x-host`, `x-consid`, `x-secret`, `x-user_key` dan `x-is_encrypt` dengan lengkap, jika salah satu kosong atau tidak dikirim maka secara default akan menggunakan metode `Environment Credential` diatas.
 
 | Request | Konten | Nilai | Keterangan |
 | ------- | ------ | ----- | ---------- |
