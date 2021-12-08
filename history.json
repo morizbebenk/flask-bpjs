@@ -1,0 +1,16 @@
+{
+    "metaData": {
+        "code": 200,
+        "message": "OK"
+    },
+    "response": [
+        {
+            "date" : "2021-12-08",
+            "message": [
+                "Ubah response saat mengakses host url dengan metode get",
+                "Catatan perubahan dapat dilihat di /history",
+                "Memperbaiki response code 1 menjadi 200"
+            ]
+        }
+    ]
+}
