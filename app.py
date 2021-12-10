@@ -110,18 +110,8 @@ def bridging():
             host = config['HOST_BPJS']
             consid = config['CONSID']
             secret = config['SECRET']
-
-            if 'IS_ENCRYPT' in config:
-                is_encrypt = config['IS_ENCRYPT']
-
-            else:
-                is_encrypt = 1
-
-            if 'USER_KEY' in config:
-                user_key = config['USER_KEY']
-
-            else:
-                user_key = ''
+            user_key = config['USER_KEY']
+            is_encrypt = config['IS_ENCRYPT']
 
         is_json = False
 
@@ -272,10 +262,10 @@ def bridging():
 
         return jsonify(data), 405
 
-@app.route("/history", methods=['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH'])
-def history():
+@app.route("/change_log", methods=['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH'])
+def change_log():
     if(request.method == 'GET'):
-        files = open('history.json')
+        files = open('change_log.json')
         data = json.load(files)
 
         return jsonify(data), 405
