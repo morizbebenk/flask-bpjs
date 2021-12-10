@@ -1,0 +1,27 @@
+{
+    "metaData": {
+        "code": 200,
+        "message": "OK"
+    },
+    "response": [
+        {
+            "date" : "2021-12-08",
+            "message" : [
+                "Ubah response saat mengakses host url dengan metode get",
+                "Catatan perubahan dapat dilihat di /change_log",
+                "Memperbaiki response code 1 menjadi 200"
+            ],
+            "version" : "v1.0"
+        },
+        {
+            "date" : "2021-12-10",
+            "message" : [
+                "Menyederhanakan kode",
+                "Mengubah file history.json menjadi change_log.json",
+                "Mengubah route /history menjadi /change_log",
+                "Menambah catatan versi di change_log.json"
+            ],
+            "version" : "v1.1"
+        }
+    ]
+}
