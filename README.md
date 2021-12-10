@@ -1,6 +1,6 @@
 ## Flask BPJS
 
-Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS VCLAIM-REST 2.0 (Encrypted Version). Support VCLAIM v1 dan API JKN (Antrean RS).
+Webservice yang digunakan untuk menangani proses dekripsi respon data dari bridging BPJS VCLAIM REST 2.0 (Encrypted Version). Support VCLAIM v1 dan API JKN (Antrean RS).
 
 ## Kebutuhan
 
@@ -57,7 +57,6 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 - Salin file `.env.example`
 - Ubah nama file menjadi `.env`
 - Lengkapi data `HOST`, `CONSID`, `SECRET`, `USER_KEY` & `IS_ENCRYPT`
-- Host Development VClaim : https://dvlp.bpjs-kesehatan.go.id/vclaim-rest-1.1/
 - Host Development VClaim : https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev/
 - Host Production VClaim : -
 - Host Development API JKN : https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/
