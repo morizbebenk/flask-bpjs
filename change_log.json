@@ -22,6 +22,15 @@
                 "Menambah catatan versi di change_log.json"
             ],
             "version" : "v1.1"
+        },
+        {
+            "date" : "2021-12-13",
+            "message" : [
+                "Menyederhanakan kode",
+                "Menambahkan host production VClaim v2.0 https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/",
+                "Memperbaiki dan mendukung respon data dengan kunci 'Code'"
+            ],
+            "version" : "v1.2"
         }
     ]
 }
