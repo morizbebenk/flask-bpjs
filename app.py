@@ -103,7 +103,7 @@ def bridging():
             consid = header_consid
             secret = header_secret
             user_key = header_user_key
-            is_encrypt = header_is_encrypt            
+            is_encrypt = header_is_encrypt
 
         else:
             config = dotenv_values(".env")
@@ -157,13 +157,15 @@ def bridging():
                 keys = consid + secret + timestamp
                 res = res.json()
 
-                if 'metaData' in res:
-                    metadata = 'metaData'
-
-                else:
+                metadata = 'metaData'
+                if metadata not in res:
                     metadata = 'metadata'
 
-                if res[metadata]['code'] == 0:
+                code = 'code'
+                if code not in res[metadata]:
+                    code = 'Code'
+
+                if res[metadata][code] == 0:
                     data = {
                         'metaData': {
                             'code': 400,
@@ -177,13 +179,13 @@ def bridging():
                 if 'response' not in res:
                     data = {
                         'metaData': {
-                            'code': res[metadata]['code'],
+                            'code': res[metadata][code],
                             'message': res[metadata]['message'],
                         },
                         'response': None
                     }
 
-                    return jsonify(data), res[metadata]['code']
+                    return jsonify(data), res[metadata][code]
 
                 if int(is_encrypt) == 1:
                     url_not_encrypt = ["SEP/2.0/delete"]
@@ -204,15 +206,15 @@ def bridging():
 
                 data = {
                     'metaData': {
-                        'code': res[metadata]['code'],
+                        'code': res[metadata][code],
                         'message': res[metadata]['message'],
                     },
                     'response': response
                 }
 
-                status_code = res[metadata]['code']
+                status_code = res[metadata][code]
 
-                if res[metadata]['code'] == 1:
+                if res[metadata][code] == 1:
                     status_code = 200
                     
                 return jsonify(data), status_code
