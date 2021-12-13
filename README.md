@@ -58,7 +58,7 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 - Ubah nama file menjadi `.env`
 - Lengkapi data `HOST`, `CONSID`, `SECRET`, `USER_KEY` & `IS_ENCRYPT`
 - Host Development VClaim : https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev/
-- Host Production VClaim : -
+- Host Production VClaim : https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/
 - Host Development API JKN : https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/
 - Host Production API JKN : -
 
