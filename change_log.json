@@ -7,11 +7,15 @@
         {
             "date" : "2021-12-08",
             "message" : [
+                "Proses pembuatan Signature otomatis.",
+                "Menangani proses dekripsi respon data BPJS VCLAIM v2.0",
+                "Mendukung Antrean RS",
+                "Mendukung BPJS VClaim v1 / v1.1",
                 "Ubah response saat mengakses host url dengan metode get",
                 "Catatan perubahan dapat dilihat di /change_log",
                 "Memperbaiki response code 1 menjadi 200"
             ],
-            "version" : "v1.0"
+            "version" : "v1.0.0"
         },
         {
             "date" : "2021-12-10",
@@ -21,7 +25,7 @@
                 "Mengubah route /history menjadi /change_log",
                 "Menambah catatan versi di change_log.json"
             ],
-            "version" : "v1.1"
+            "version" : "v1.0.1"
         },
         {
             "date" : "2021-12-13",
@@ -30,7 +34,15 @@
                 "Menambahkan host production VClaim v2.0 https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/",
                 "Memperbaiki dan mendukung respon data dengan kunci 'Code'"
             ],
-            "version" : "v1.2"
+            "version" : "v1.0.2"
+        },
+        {
+            "date" : "2021-12-21",
+            "message" : [
+                "Menambah error handling ketika request dengan try except",
+                "Mengubah sistem versi dengan mengacu pada Semantic versioning"
+            ],
+            "version" : "v1.0.3"
         }
     ]
 }
