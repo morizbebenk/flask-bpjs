@@ -1,7 +1,7 @@
 {
     "metaData": {
         "code": 200,
-        "message": "OK"
+        "message": "Catatan Perubahan"
     },
     "response": [
         {
@@ -43,6 +43,13 @@
                 "Mengubah sistem versi dengan mengacu pada Semantic versioning"
             ],
             "version" : "v1.0.3"
+        },
+        {
+            "date" : "2021-12-27",
+            "message" : [
+                "Menambah nilai SEP/2.0/update pada variabel url_not_encrypt"
+            ],
+            "version" : "v1.0.4"
         }
     ]
 }
