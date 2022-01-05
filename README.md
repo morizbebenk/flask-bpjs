@@ -60,7 +60,7 @@ pip install Flask lzstring requests flask_cors pycryptodome python-dotenv
 - Host Development VClaim : https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev/
 - Host Production VClaim : https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/
 - Host Development Antrean RS : https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/
-- Host Production Antrean RS : -
+- Host Production Antrean RS : https://apijkn.bpjs-kesehatan.go.id/antreanrs/
 
 ## Pengaturan
 
