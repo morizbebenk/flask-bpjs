@@ -52,7 +52,6 @@ def fixed_url(url):
     else:
         return url
 
-
 def rest_bpjs(consid, secret, user_key, url, method, payload, timestamp):
     message = consid+"&"+timestamp
     signature = hmac.new(bytes(secret,'UTF-8'),bytes(message,'UTF-8'), hashlib.sha256).digest()
