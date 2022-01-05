@@ -3,10 +3,43 @@
         "code": 200,
         "message": "Catatan Perubahan"
     },
-    "response": [
+    "response": [{
+            "date": "2021-12-27",
+            "message": [
+                "Menambah nilai SEP/2.0/update pada variabel url_not_encrypt"
+            ],
+            "version": "v1.0.4"
+        },
         {
-            "date" : "2021-12-08",
-            "message" : [
+            "date": "2021-12-21",
+            "message": [
+                "Menambah error handling ketika request dengan try except",
+                "Mengubah sistem versi dengan mengacu pada Semantic versioning"
+            ],
+            "version": "v1.0.3"
+        },
+        {
+            "date": "2021-12-13",
+            "message": [
+                "Menyederhanakan kode",
+                "Menambahkan host production VClaim v2.0 https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/",
+                "Memperbaiki dan mendukung respon data dengan kunci 'Code'"
+            ],
+            "version": "v1.0.2"
+        },
+        {
+            "date": "2021-12-10",
+            "message": [
+                "Menyederhanakan kode",
+                "Mengubah file history.json menjadi change_log.json",
+                "Mengubah route /history menjadi /change_log",
+                "Menambah catatan versi di change_log.json"
+            ],
+            "version": "v1.0.1"
+        },
+        {
+            "date": "2021-12-08",
+            "message": [
                 "Proses pembuatan Signature otomatis.",
                 "Menangani proses dekripsi respon data BPJS VCLAIM v2.0",
                 "Mendukung Antrean RS",
@@ -15,41 +48,7 @@
                 "Catatan perubahan dapat dilihat di /change_log",
                 "Memperbaiki response code 1 menjadi 200"
             ],
-            "version" : "v1.0.0"
-        },
-        {
-            "date" : "2021-12-10",
-            "message" : [
-                "Menyederhanakan kode",
-                "Mengubah file history.json menjadi change_log.json",
-                "Mengubah route /history menjadi /change_log",
-                "Menambah catatan versi di change_log.json"
-            ],
-            "version" : "v1.0.1"
-        },
-        {
-            "date" : "2021-12-13",
-            "message" : [
-                "Menyederhanakan kode",
-                "Menambahkan host production VClaim v2.0 https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/",
-                "Memperbaiki dan mendukung respon data dengan kunci 'Code'"
-            ],
-            "version" : "v1.0.2"
-        },
-        {
-            "date" : "2021-12-21",
-            "message" : [
-                "Menambah error handling ketika request dengan try except",
-                "Mengubah sistem versi dengan mengacu pada Semantic versioning"
-            ],
-            "version" : "v1.0.3"
-        },
-        {
-            "date" : "2021-12-27",
-            "message" : [
-                "Menambah nilai SEP/2.0/update pada variabel url_not_encrypt"
-            ],
-            "version" : "v1.0.4"
+            "version": "v1.0.0"
         }
     ]
 }
