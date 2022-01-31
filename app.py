@@ -87,11 +87,12 @@ def rest_bpjs(consid, secret, user_key, url, method, payload, timestamp):
             else:
                 res = requests.get(url, data=payload, headers=headers)
 
-    except:
+    except ValueError as e:
         res = {
             'metaData': {
-                'code': "400",
+                'code': 400,
                 'message': "Ada kesalahan request data, cek kembali",
+                'error': e
             },
             'response': None
         }
@@ -258,7 +259,7 @@ def bridging():
             'metaData': {
                 'code': 200,
                 'message': "Selamat datang di " + request.host_url + " Webservice yang digunakan untuk menangani proses dekripsi data response dari bridging BPJS VCLAIM-REST 2.0 (Encrypted Version). Support VCLAIM v1 dan API JKN (Antrean RS).",
-                'note': "Catatan perubahan tersedia di " + request.host_url + "history"
+                'note': "Catatan perubahan tersedia di " + request.host_url + "change_log"
             },
             'response': None
         }
